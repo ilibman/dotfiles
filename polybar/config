@@ -1,0 +1,168 @@
+[colors]
+green  = #98971a
+black  = #32302f
+white  = #ebdbb2
+blue   = #458588
+red    = #cc241d
+gray   = #282828
+yellow = #d79921
+
+[global/wm]
+margin-top = 0
+margin-bottom = 24
+
+[bar/left]
+monitor = ${env:LEFT_DISPLAY}
+width = 1920
+height = 24
+bottom = true
+offset-x = 0
+offset-y = 0
+fixed-center = false
+;override-redirect = true
+wm-restack = bspwm
+
+background = ${colors.black}
+foreground = ${colors.white}
+
+border-size = 0
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = JetBrainsMono Nerd Font:size=10:weight=medium:antialias=true:autohint=true;4
+;font-0 = SF UI Display:size=15:weight=light:antialias=true:autohint=true;4
+font-1 = Iosevka Nerd Font:size=11:antialias=true:autohint=true;1
+
+modules-left = bspwm
+modules-right = ic_wlan wlan ic_time time ic_date date
+
+[bar/right]
+monitor = ${env:RIGHT_DISPLAY}
+width = 1920
+inherit = bar/left
+
+[bar/center]
+monitor = ${env:CENTER_DISPLAY}
+width = 1080
+inherit = bar/left
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %icon%
+label-focused-foreground = ${colors.black}
+label-focused-background = ${colors.green}
+label-focused-padding = 1
+
+label-occupied = %icon%
+label-occupied-foreground = ${colors.white}
+label-occupied-background = ${colors.black}
+label-occupied-padding = 1
+
+label-urgent = %icon%
+label-urgent-foreground = ${colors.white}
+label-urgent-background = ${colors.red}
+label-urgent-padding = 1
+
+label-empty = %icon%
+label-empty-foreground = ${colors.black}
+label-empty-padding = 1
+
+ws-icon-0 = 1;1
+ws-icon-1 = 2;2
+ws-icon-2 = 3;3
+ws-icon-3 = 4;4
+ws-icon-4 = 5;5
+ws-icon-5 = 6;6
+ws-icon-6 = 7;7
+ws-icon-7 = 8;8
+ws-icon-8 = 9;9
+ws-icon-9 = 10;10
+ws-icon-10 = 11;11
+ws-icon-11 = 12;12
+ws-icon-12 = 13;a
+ws-icon-13 = 14;b
+ws-icon-14 = 15;c
+ws-icon-15 = 16;d
+
+
+[module/wlan]
+type = internal/network
+interface = wlp11s0f3u1
+interval = 3.0
+
+format-connected = <label-connected>
+format-connected-foreground = ${colors.white}
+format-connected-padding = 1
+label-connected = %essid%
+
+format-disconnected = "No wifi"
+format-disconnected-foreground = ${colors.white}
+format-disconnected-padding = 1
+
+[module/eth]
+type = internal/network
+interface = enp6s0
+interval = 3.0
+
+format-connected = <label-connected>
+format-connected-foreground = ${colors.white}
+format-connected-padding = 1
+
+format-disconnected = "No lan"
+format-disconnected-foreground = ${colors.white}
+format-disconnected-padding = 1
+
+label-connected = %local_ip%
+
+[module/time]
+type = internal/date
+
+interval = 60
+
+time = %H:%M
+
+label = %time%
+
+format-foreground = ${colors.white}
+format-padding = 1
+
+[module/date]
+type = internal/date
+
+interval = 360
+
+date = %A %d.%m.%y
+
+label = %date%
+
+format-foreground = ${colors.white}
+format-padding = 1
+
+[module/ic_date]
+type = custom/text
+label-active-font = 1
+content = "   "
+content-foreground = ${colors.white}
+
+[module/ic_time]
+type = custom/text
+label-active-font = 1
+content = "   "
+content-foreground = ${colors.white}
+
+[module/ic_wlan]
+type = custom/text
+label-active-font = 1
+content = "   "
+content-foreground = ${colors.white}
+
+[module/ic_eth]
+type = custom/text
+label-active-font = 1
+content = "   "
+content-foreground = ${colors.white}

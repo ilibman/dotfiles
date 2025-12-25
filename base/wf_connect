@@ -1,0 +1,77 @@
+#!/bin/bash
+
+wname=wlp11s0f3u1
+uname=ilibman
+
+if [ ! $# -eq 1 ]
+then
+	echo
+	echo "    Usage: wf_connect <profile>"
+	echo
+else
+	essid=$(grep $1 /home/$uname/.wifi-profiles | cut -d':' -f2)
+	key=$(grep $1 /home/$uname/.wifi-profiles | cut -d':' -f3)
+	if [[ -z $essid ]]
+	then
+		echo
+		echo "    Profile not found"
+		echo
+		exit 1
+	fi
+	if [[ -z $key ]]
+	then
+		echo "ctrl_interface=/run/wpa_supplicant" > /home/$uname/.wifi-config
+		echo "ctrl_interface_group=wheel" >> /home/$uname/.wifi-config
+		echo "eapol_version=1" >> /home/$uname/.wifi-config
+		echo "ap_scan=1" >> /home/$uname/.wifi-config
+		echo "fast_reauth=1" >> /home/$uname/.wifi-config
+		echo "update_config=1" >> /home/$uname/.wifi-config
+		echo >> /home/$uname/.wifi-config
+		echo "network={" >> /home/$uname/.wifi-config
+		echo "" >> /home/$uname/.wifi-config
+		echo -e "    ssid=\"$essid\"" >> /home/$uname/.wifi-config
+		echo "    key_mgmt=NONE" >> /home/$uname/.wifi-config
+		echo "}" >> /home/$uname/.wifi-config
+		rfkill unblock all
+		wpa_supplicant -B -i $wname -c /home/$uname/.wifi-config
+		echo
+		echo "    Network found, trying to connect..."
+		echo
+		sleep 5
+		dhcpcd $wname
+		exit 0
+	fi
+	passphrase=$(wpa_passphrase "$essid" "$key")
+	echo "ctrl_interface=/run/wpa_supplicant" > /home/$uname/.wifi-config
+	echo "ctrl_interface_group=wheel" >> /home/$uname/.wifi-config
+	echo "eapol_version=1" >> /home/$uname/.wifi-config
+	echo "ap_scan=1" >> /home/$uname/.wifi-config
+	echo "fast_reauth=1" >> /home/$uname/.wifi-config
+	echo "update_config=1" >> /home/$uname/.wifi-config
+	echo >> /home/$uname/.wifi-config
+	echo "network={" >> /home/$uname/.wifi-config
+	echo "" >> /home/$uname/.wifi-config
+	echo -e "    ssid=\"$essid\"" >> /home/$uname/.wifi-config
+	echo "    proto=RSN" >> /home/$uname/.wifi-config
+	echo "    key_mgmt=WPA-PSK" >> /home/$uname/.wifi-config
+	echo "    pairwise=CCMP TKIP" >> /home/$uname/.wifi-config
+	echo "    group=CCMP TKIP" >> /home/$uname/.wifi-config
+	echo "    #psk=$key" >> /home/$uname/.wifi-config
+	for line in $passphrase
+	do
+		if [ ${line:0:3} == 'psk' ]
+		then
+			echo "    $line" >> /home/$uname/.wifi-config
+		fi
+	done
+	echo "}" >> /home/$uname/.wifi-config
+	rfkill unblock all
+	wpa_supplicant -B -i $wname -c /home/$uname/.wifi-config
+	echo
+	echo "    Network found, trying to connect..."
+	echo
+	sleep 5
+	dhcpcd $wname
+fi
+
+

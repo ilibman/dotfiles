@@ -1,0 +1,28 @@
+# This is the configuration file for Ghostty.
+#
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Ghostty can reload the configuration while running by using the menu
+# options or the bound key (default: Command + Shift + comma on macOS and
+# Control + Shift + comma on other platforms). Not all config options can be
+# reloaded while running; some only apply to new windows and others may require
+# a full restart to take effect.
+#
+# other useful commands:
+# 	ghostty +list-fonts
+#	+list-keybindings
+#	+list-themes
+#	+list-colors
+#	+list-actions
+#	+show-config
+
+theme = Gruvbox Dark
+
+window-padding-x = 0
+window-decoration = none
+resize-overlay = never
+
+font-family = Iosevka Nerd Font
+font-size = 11
+adjust-cell-width = -15%

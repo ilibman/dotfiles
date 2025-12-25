@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+killall -q polybar
+while pgrep -u $UID -x polybar >/dev/null; do
+  sleep 1; done
+
+feh --bg-center ~/.img/cwall.png --bg-fill '#000000' --bg-center ~/.img/cwall.png
+polybar left -r &
+polybar right -r &
+polybar center -r &
+bspc monitor $LEFT_DISPLAY -d 1 2 3 4 5 6
+bspc monitor $RIGHT_DISPLAY -d 7 8 9 10 11 12
+bspc monitor $CENTER_DISPLAY -d 13 14 15 16
+
+# STATE := tiled|pseudo_tiled|floating|fullscreen
+# FLAG := hidden|sticky|private|locked|marked|urgent
+# LAYER := below|normal|above
+# SPLIT_TYPE := horizontal|vertical
+# PATH := @[DESKTOP_SEL:][[/]JUMP](/JUMP)*
+# JUMP := first|1|second|2|brother|parent|DIR
+
+# bspc rule -a "Rofi" 
+# bspc rule -a "Emacs" state=tiled
+# bspc rule -a "VirtualBox Manager" desktop=^6
+# bspc rule -a Chromium desktop=^9
+# bspc rule -a Firefox desktop=^10
+# bspc rule -a "TelegramDesktop" desktop=^12
+# bspc rule -a "Zathura" desktop=^8 fullscreen=true
+# virtualbox -r &
+# firefox -r &
+# chromium -r &
+# telegram-desktop -r &
+# bspc rule -a "jetbrains-webstorm" state=floating
+
+bspc config border_width         2
+bspc config window_gap           2
+bspc config top_padding          0
+
+bspc config normal_border_color  "#32302f"
+bspc config focused_border_color "#444b6a"
+bspc config presel_border_color  "#fbf1c7"
+bspc config click_to_focus       true
+
+bspc config split_ratio          0.50
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config single_monocle       true

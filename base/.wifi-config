@@ -1,0 +1,15 @@
+ctrl_interface=/run/wpa_supplicant
+ctrl_interface_group=wheel
+eapol_version=1
+ap_scan=1
+fast_reauth=1
+update_config=1
+
+network={
+    ssid="Konohagakure"
+    proto=RSN
+    key_mgmt=WPA-PSK
+    pairwise=CCMP TKIP
+    group=CCMP TKIP
+    psk=d95d44cc21e8e1b463aaf69ffdaad26bb5773dd6bc51747fe2dcbd148d67bb88
+}

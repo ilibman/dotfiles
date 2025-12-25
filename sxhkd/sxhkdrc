@@ -1,0 +1,80 @@
+super + e
+    ghostty
+
+super + n
+    codium -n
+
+# Winkey + e = Emacs
+# super + e
+# emacs --fullscreen
+
+# focus the node in the given direction
+super + {h,j,k,l}
+  bspc node -f {west,south,north,east}
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+  bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+  bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# Winkey + l = program launcher
+super + r
+  rofi -m -1 -show drun
+
+super + w
+  rofi -m -1 -show window
+
+super + i
+  rofi -m -1 -show calc
+
+super + x
+  rofi -m -1 -show power-menu -modi power-menu:/home/ilibman/.local/bin/rofi-power-menu
+
+# Winkey + q = kill window
+super + q
+    bspc node -c
+
+# Move window to another workspace
+super + {_,shift + }{1-6}
+    bspc {desktop -f,node -d} '^{1-6}'
+super + {_,shift + }{a,b,c,d}
+    bspc {desktop -f,node -d} '^{7,8,9,10}'
+super + {_,shift + }{7-9,0,minus,equal}
+    bspc {desktop -f,node -d} '^{11,12,13,14,15,16}'
+
+Print
+  scrot ~/screenshots/%Y-%m-%d-%T-src.png
+
+# alt + number -> switch language
+#hyper + {1-5}
+  #setxkbmap {us,ru,cz,de -variant qwerty,fr}
+# setxkbmap {us,ru,cz,de -variant qwerty,fr,tr} -option caps:swapescape
+super + KP_End
+  setxkbmap us -option caps:escape
+
+super + KP_Down
+  setxkbmap ua -option caps:escape
+
+super + KP_Next
+  setxkbmap cz -variant qwerty -option caps:escape
+
+super + KP_Left
+  setxkbmap de -variant qwerty -option caps:escape
+
+super + KP_Begin
+  setxkbmap ru -option caps:escape
+
+super + KP_Right
+  setxkbmap az -option caps:escape
+
+super + KP_Home
+  setxkbmap ara -option caps:escape
+
+super + KP_Up
+  setxkbmap es -option caps:escape
+
+super + KP_Prior
+  setxkbmap fr -option caps:escape
