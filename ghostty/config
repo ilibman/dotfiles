@@ -16,6 +16,7 @@
 #	+list-colors
 #	+list-actions
 #	+show-config
+#	+show-config --default	(show settings default values)
 
 theme = Gruvbox Dark
 
@@ -23,6 +24,15 @@ window-padding-x = 0
 window-decoration = none
 resize-overlay = never
 
-font-family = Iosevka Nerd Font
-font-size = 11
+window-inherit-working-directory = false
+tab-inherit-working-directory = true
+split-inherit-working-directory = true
+
+#font-family = Iosevka Custom
+font-family = JetBrainsMonoNL Nerd Font Mono
+font-size = 10
 adjust-cell-width = -15%
+window-inherit-font-size = false
+
+# don't ask for confirmation upon window close
+confirm-close-surface = false
