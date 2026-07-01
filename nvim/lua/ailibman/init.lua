@@ -1,2 +1,3 @@
 require('ailibman.plugins')
-require('ailibman.remap')
+require('ailibman.options')
+require('ailibman.keymaps')
